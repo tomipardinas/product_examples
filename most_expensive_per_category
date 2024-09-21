@@ -1,0 +1,17 @@
+# Import your libraries
+import pandas as pd
+
+df = innerwear_amazon_com
+
+
+# Convert 'price' column to numeric, removing any currency symbols and commas
+df['price'] = df['price'].replace('[\$,]', '', regex=True).astype(float)
+
+##Step 1 - bring indexes from max values 
+most_expensive_index = df.groupby('product_category')['price'].idxmax()
+
+## Step 2 - Find the rows value 
+
+top_rows =df.loc[most_expensive_index]
+
+top_rows[['product_category','product_name','price']]
